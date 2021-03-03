@@ -3,15 +3,18 @@
 function testValidity(passAtmpt){
     
     //requirements to be met
-    var lengthValid = false;
-    var validLetter = false;
-    var validNum = false;
-    
+
+    var requirements = {
+        lengthValid: false,
+        validLetter: false,
+        validNum: false,
+        validPass: false
+    }
 
     //long enough
     if(passAtmpt.length >= 8){
         console.log("password is long enougn at " + passAtmpt.length + " characters long")
-        lengthValid = true;
+        requirements.lengthValid = true;
     }else{
         console.log("password is too short at " + passAtmpt.length + " characters long")
     }
@@ -21,7 +24,7 @@ function testValidity(passAtmpt){
     for(var i = 0; i < passAtmpt.length; i += 1){
 
         if(alphabet.contains(passAtmpt[i]) || alphabet.contains((passAtmpt[i]).toLowerCase())){
-            validLetter = true;
+            requirements.validLetter = true;
             console.log('valid letter')
             break;
         }else{            
@@ -34,7 +37,7 @@ function testValidity(passAtmpt){
     for(var j = 0; j < passAtmpt.length; j += 1){
 
         if(numbers.contains(passAtmpt[j])){
-            validNum = true;
+            requirements.validNum = true;
             console.log('valid number')
             break;
         }else{            
@@ -42,13 +45,8 @@ function testValidity(passAtmpt){
         }
     }
 
-    console.log(lengthValid,  validLetter, validNum)
+    //returning evaluation of password
+    requirements.validPass = false;
 
-    var validPass = false;
-    if(lengthValid || validLetter || validNum){
-        return passAtmpt + " is an acceptable password"
-    }else{
-        return passAtmpt + " is not an acceptable password"
-    }
-
+    return requirements;
 }
