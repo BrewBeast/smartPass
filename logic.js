@@ -45,16 +45,8 @@ function testValidity(passAtmpt){
         }
     }
 
-//     console.log(lengthValid,  validLetter, validNum)
-
+    //returning evaluation of password
     requirements.validPass = false;
 
     return requirements;
-
-    if(lengthValid || validLetter || validNum){
-        return passAtmpt + " is an acceptable password"
-    }else{
-        return passAtmpt + " is not an acceptable password"
-    }
-
 }
