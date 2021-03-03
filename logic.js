@@ -1,6 +1,6 @@
 //LOGIC THAT WILL DETERMINE PASSWORD VIABLILITY 
 
-function testValidity(passAtmpt){
+function testValidity(passAtmpt, userType){
     
     //requirements to be met
 
@@ -8,11 +8,28 @@ function testValidity(passAtmpt){
         lengthValid: false,
         validLetter: false,
         validNum: false,
+        validsChar: false,
         validPass: false
     }
 
+    if(userType === "admin"){
+        requirements.type = "admin";
+        requirements.length = 13;
+        requirements.letters = 1;
+        requirements.nums = 1;
+        requirements.sChar = 1;
+
+    }else{
+        requirements.type = "normal"
+        requirements.length = 8;
+        requirements.letters = 1;
+        requirements.nums = 1;
+        requirements.sChar = 0;
+    }
+
+
     //long enough
-    if(passAtmpt.length >= 8){
+    if(passAtmpt.length >= requirements.length){
         console.log("password is long enougn at " + passAtmpt.length + " characters long")
         requirements.lengthValid = true;
     }else{
@@ -45,8 +62,27 @@ function testValidity(passAtmpt){
         }
     }
 
-    //returning evaluation of password
-    requirements.validPass = false;
+    //contains a special characters
+    var sChar = "!@#$%^&*()_-=+[]\{}|;':\"\"'\\,./<>?\`~";
+    var count = 0;
+    for(var k = 0; k < passAtmpt.length; k += 1){
+        if(sChar.contains(passAtmpt[k])){
+            count += 1;
+            console.log("valid special character")
+        }else{            
+            console.log("not a valid special character")
+        }
+        if(count >= requirements.sChar){
+            requirements.validsChar = true;
+            console.log('meets required special character count')
+            break;
+        }
+
+    }
+
+    if(requirements.lengthValid && requirements.validLetter && requirements.validNum && requirements.validsChar){
+        requirements.validPass = true;
+    }
 
     return requirements;
 }
