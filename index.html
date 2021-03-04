@@ -3,9 +3,30 @@
         <title></title>
     </head>
     <body>
-        <form>
-            <label>Password</label>
-            <input type="text">
+        <form id="passwordEntry">
+            <label for="password">Password</label>
+            <input type="text" id="password">
+            <label for="userType"></label>
+            <select name="userType" id="userType">
+                <option value="Admin">Admin</option>
+                <option value="Normal">Normal</option>
+            <input type="submit" onclick="">
         </form>
+        
+        <p id="validity"></p>
+
+        <script>
+            var form = document.getElementById("passwordEntry");
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                var validity = document.getElementById("validity");
+                validity.innerHTML = "password received as " + form.password.value;
+            }
+        </script>
+
+
+
+        <script src="logic.js"></script>
+
     </body>
 </html>
