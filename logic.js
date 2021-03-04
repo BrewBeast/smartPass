@@ -3,15 +3,7 @@
 function testValidity(passAtmpt, userType){
     
     //requirements to be met
-
-    var requirements = {
-        lengthValid: false,
-        validLetter: false,
-        validNum: false,
-        validsChar: false,
-        validPass: false
-    }
-
+    var requirements = {};
     if(userType === "admin"){
         requirements.type = "admin";
         requirements.length = 13;
@@ -26,63 +18,60 @@ function testValidity(passAtmpt, userType){
         requirements.nums = 1;
         requirements.sChar = 0;
     }
-
-
-    //long enough
-    if(passAtmpt.length >= requirements.length){
-        console.log("password is long enougn at " + passAtmpt.length + " characters long")
-        requirements.lengthValid = true;
-    }else{
-        console.log("password is too short at " + passAtmpt.length + " characters long")
-    }
-
-    //contains letter
-    var alphabet = "abcdefghijklmnopqrstuvqxyz";
-    for(var i = 0; i < passAtmpt.length; i += 1){
-
-        if(alphabet.contains(passAtmpt[i]) || alphabet.contains((passAtmpt[i]).toLowerCase())){
-            requirements.validLetter = true;
-            console.log('valid letter')
-            break;
-        }else{            
-            console.log("not a valid letter")
+    
+    //function checks for letter
+    function containsLetter(string){
+        var alphabet = "abcdefghijklmnopqrstuvqxyz";
+        for(var i = 0; i < string.length; i += 1){
+            for(var l = 0; l < alphabet.length; l += 1){
+                if(alphabet[l] === string[i] || alphabet === (string[i]).toLowerCase){
+                    return true
+                }
+            }
+            
         }
+        return false;
     }
-
-    //contains a number
-    var numbers = "0123456789"
-    for(var j = 0; j < passAtmpt.length; j += 1){
-
-        if(numbers.contains(passAtmpt[j])){
-            requirements.validNum = true;
-            console.log('valid number')
-            break;
-        }else{            
-            console.log("not a valid number")
+    
+    //function checks for number
+    function containsNumber(string){
+        var numbers = "0123456789"
+        for(var j = 0; j < string.length; j += 1){
+            for(var m = 0; m < numbers.length; m += 1){
+                if(numbers[m] === string[j]){
+                    return true
+                }
+            }    
         }
+        return false;
     }
-
-    //contains a special characters
-    var sChar = "!@#$%^&*()_-=+[]\{}|;':\"\"'\\,./<>?\`~";
-    var count = 0;
-    for(var k = 0; k < passAtmpt.length; k += 1){
-        if(sChar.contains(passAtmpt[k])){
-            count += 1;
-            console.log("valid special character")
-        }else{            
-            console.log("not a valid special character")
+    
+    
+    //function checks for special characters
+    function countSchar(string){
+        var sChar = "!@#$%^&*()_-=+[]\{}|;':\"\"'\\,./<>?\`~";
+        var count = 0;
+        for(var k = 0; k < string.length; k += 1){
+            for(var n = 0; n < sChar.length; n += 1){
+                if(sChar[n] == string[k]){
+                    console.log(sting[k])
+                    count += 1;
+                    console.log("valid special character")
+                    break;
+                }
+            }
         }
-        if(count >= requirements.sChar){
-            requirements.validsChar = true;
-            console.log('meets required special character count')
-            break;
-        }
-
+        return count;
     }
+    
+    
+    //assessment
 
-    if(requirements.lengthValid && requirements.validLetter && requirements.validNum && requirements.validsChar){
-        requirements.validPass = true;
-    }
-
+    requirements.lengthValid = passAtmpt.length >= requirements.length,
+    requirements.validLetter = containsLetter(passAtmpt),
+    requirements.validNum = containsNumber(passAtmpt),
+    requirements.validsChar = countSchar(passAtmpt) >= requirements.sChar,
+    requirements.validPass = requirements.lengthValid && requirements.validLetter && requirements.validNum && requirements.validsChar;
+    
     return requirements;
 }
