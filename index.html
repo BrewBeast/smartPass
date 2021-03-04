@@ -20,7 +20,10 @@
             form.onsubmit = function(e) {
                 e.preventDefault();
                 var validity = document.getElementById("validity");
-                validity.innerHTML = "password received as " + form.password.value;
+                validity.innerHTML = "password received as " + form.password.value + " for a " + form.userType.value + " type user";
+
+                var valid = testValidity(form.password.value)
+                console.log(valid)
             }
         </script>
 
