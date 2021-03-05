@@ -5,7 +5,7 @@
     <body>
         <form id="passwordEntry">
             <label for="password">Password</label>
-            <input type="text" id="password">
+            <input type="password" id="password">
             <label for="userType"></label>
             <select name="userType" id="userType">
                 <option value="Admin">Admin</option>
@@ -13,17 +13,38 @@
             <input type="submit" onclick="">
         </form>
         
+        <P id="received"></P>
         <p id="validity"></p>
+        <p id="length"></p>
+        <p id="letters"></p>
+        <p id="numbers"></p>
+        <p id="special"></p>
+
 
         <script>
             var form = document.getElementById("passwordEntry");
             form.onsubmit = function(e) {
+                var result = testValidity(form.password.value, form.userType.value);
                 e.preventDefault();
+                
+                //confirm password was received
+                var received = document.getElementById("received");
+                received.innerHTML = "password received as " + form.password.value + " for a " + form.userType.value + " type user";
+                
+                //confirms password validity
                 var validity = document.getElementById("validity");
-                validity.innerHTML = "password received as " + form.password.value + " for a " + form.userType.value + " type user";
-
-                var valid = testValidity(form.password.value)
-                console.log(valid)
+                validity.innerHTML = result.validPass ? "This password meets strength requirements" : "This passowrd does not meet the strength requirements";
+                
+                //checklist of requirement met
+                var length = document.getElementById("length");
+                length.innerHTML = result.lengthValid ? "- Password meets length requirements" : "X Password doesn't meet length requirements";
+                var letters = document.getElementById("letters");
+                letters.innerHTML = result.validLetter ? "- Password meets letter requirements" : "X Password doesn't meet letter requirements";
+                var numbers = document.getElementById("numbers");
+                numbers.innerHTML = result.validNum ? "- Password meets number requirements" : "X Password doesn't meet number requirements";
+                var special = document.getElementById("special");
+                special.innerHTML = result.validsChar ? "- Password meets special character requirements" : "X Password doesn't meet special character requirements";
+                // console.log(result)
             }
         </script>
 

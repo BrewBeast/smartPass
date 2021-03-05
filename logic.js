@@ -4,7 +4,7 @@ function testValidity(passAtmpt, userType){
     
     //requirements to be met
     var requirements = {};
-    if(userType === "admin"){
+    if(userType === "Admin"){
         requirements.type = "admin";
         requirements.length = 13;
         requirements.letters = 1;
@@ -19,7 +19,7 @@ function testValidity(passAtmpt, userType){
         requirements.sChar = 0;
     }
     
-    //function checks for letter
+    //function checks for letters
     function containsLetter(string){
         var alphabet = "abcdefghijklmnopqrstuvqxyz";
         for(var i = 0; i < string.length; i += 1){
@@ -33,7 +33,7 @@ function testValidity(passAtmpt, userType){
         return false;
     }
     
-    //function checks for number
+    //function checks for numbers
     function containsNumber(string){
         var numbers = "0123456789"
         for(var j = 0; j < string.length; j += 1){
@@ -54,9 +54,7 @@ function testValidity(passAtmpt, userType){
         for(var k = 0; k < string.length; k += 1){
             for(var n = 0; n < sChar.length; n += 1){
                 if(sChar[n] == string[k]){
-                    console.log(sting[k])
                     count += 1;
-                    console.log("valid special character")
                     break;
                 }
             }
